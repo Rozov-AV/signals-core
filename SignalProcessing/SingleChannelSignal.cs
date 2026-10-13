@@ -52,6 +52,11 @@ namespace SignalProcessing.Core
         /// <param name="frequency">Частота (Гц).</param>
         public SingleChannelSignal(float[] data, float frequency)
         {
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
+            if (frequency < 1)
+                throw new ArgumentOutOfRangeException(nameof(frequency), "Частота должна быть положительна!");
+
             Data = data;
             Frequency = frequency;
         }
