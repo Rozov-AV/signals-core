@@ -36,6 +36,9 @@ namespace SignalProcessing.Core
 
         public OnlineSingleChannelFilter(int windowSize)
         {
+            if (windowSize < 1)
+                throw new ArgumentOutOfRangeException(nameof(windowSize), "Некорректный размер окна!");
+
             _windowSize = windowSize;
             _index = 0;
         }
@@ -51,6 +54,9 @@ namespace SignalProcessing.Core
         /// <returns>Фильтрованный фрагмент сигнала.</returns>
         public float[] Filter(float[] data)
         {
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
+
             if (!Active)
             {
                 return data;

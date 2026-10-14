@@ -22,6 +22,11 @@ namespace SignalProcessing.Core
 
         public static float[] Filter(float[] data, int windowSize)
         {
+            if (windowSize < 1)
+                throw new ArgumentOutOfRangeException(nameof(windowSize), "Некорректный размер окна!");
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
+
             int length = data.Length;
             int windowRadius = windowSize / 2;
             int extLength = length + 2 * windowRadius;
