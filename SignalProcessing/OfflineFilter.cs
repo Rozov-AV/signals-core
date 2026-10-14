@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SignalProcessing.Core
 {
-    public static class OfflineSingleChannelFilter
+    public static class OfflineFilter
     {
         #region Поля и свойства
 

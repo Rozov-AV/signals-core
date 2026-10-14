@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SignalProcessing.Core
 {
-    public class OnlineSingleChannelFilter
+    public class OnlineFilter
     {
         #region Поля и свойства
 
@@ -34,7 +34,7 @@ namespace SignalProcessing.Core
 
         #region Конструкторы
 
-        public OnlineSingleChannelFilter(int windowSize)
+        public OnlineFilter(int windowSize)
         {
             if (windowSize < 1)
                 throw new ArgumentOutOfRangeException(nameof(windowSize), "Некорректный размер окна!");

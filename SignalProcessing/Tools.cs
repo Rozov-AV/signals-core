@@ -100,7 +100,7 @@ namespace SignalProcessing.Core
             int length = signal.Data.Length;
             float[] srcData = signal.Data;
             float frequency = signal.Frequency;
-            float[] filteredData = OfflineSingleChannelFilter.Filter(srcData,
+            float[] filteredData = OfflineFilter.Filter(srcData,
                 (int)(windowSize * frequency + 0.5));
 
             return new SingleChannelSignal(filteredData, signal.Frequency);
