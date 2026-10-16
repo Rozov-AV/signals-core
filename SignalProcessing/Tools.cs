@@ -106,69 +106,6 @@ namespace SignalProcessing.Core
             return new SingleChannelSignal(filteredData, signal.Frequency);
         }
 
-        /// <summary>
-        /// Вычисляет сумму сигналов. Все суммируемые сигналы должны иметь одинаковую частоту.
-        /// </summary>
-        /// <param name="signals">Суммируемые сигналы.</param>
-        /// <returns>Сумма сигналов.</returns>
-        public static SingleChannelSignal SumSignals(List<SingleChannelSignal> signals)
-        {
-            int count = signals.Count;
-            if (count <= 0)
-                return null;
-
-            float frequency = signals.First().Frequency;
-            for (int i = 1; i < count; i++)
-            {
-                if (Math.Abs(signals[i].Frequency - frequency) > 1e-5)
-                {
-                    return null;
-                }
-            }
-
-            int length = signals.Select(s => s.Data.Length).Max();
-            float[] resData = new float[length];
-            for (int signalInd = 0; signalInd < count; signalInd++)
-            {
-                float[] data = signals[signalInd].Data;
-                for (int sampleInd = 0; sampleInd < signals[signalInd].Data.Length; sampleInd++)
-                {
-                    resData[sampleInd] += data[sampleInd];
-                }
-            }
-
-            return new SingleChannelSignal(resData, frequency);
-        }
-
-        /// <summary>
-        /// Склеивает набор сигналов в один.
-        /// </summary>
-        /// <param name="signals">Набор склеиваемых сигналов.</param>
-        /// <returns>Склеенный сигнал.</returns>
-        public static SingleChannelSignal ConcatSignals(List<SingleChannelSignal> signals)
-        {
-            int count = signals.Count;
-            if (count <= 0)
-                return null;
-
-            float frequency = signals.First().Frequency;
-            for (int i = 1; i < count; i++)
-            {
-                if (Math.Abs(signals[i].Frequency - frequency) > 1e-5)
-                {
-                    return null;
-                }
-            }
-
-            IEnumerable<float> resData = new float[0];
-            for (int signalInd = 0; signalInd < count; signalInd++)
-            {
-                resData = resData.Concat(signals[signalInd].Data);
-            }
-
-            return new SingleChannelSignal(resData.ToArray(), frequency);
-        }
-
         public static SingleChannelSignal ConcatSignals(List<SingleChannelSignal> signals,
             float windowTime)
         {
