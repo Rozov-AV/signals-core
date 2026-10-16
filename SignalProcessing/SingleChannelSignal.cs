@@ -53,7 +53,7 @@ namespace SignalProcessing.Core
         public SingleChannelSignal(float[] data, float frequency)
         {
             if (data == null)
-                throw new ArgumentNullException(nameof(data));
+                throw new ArgumentNullException(nameof(data), "Массив с данными null!");
             if (frequency < 1)
                 throw new ArgumentOutOfRangeException(nameof(frequency), "Частота должна быть положительна!");
 
