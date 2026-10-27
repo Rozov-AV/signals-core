@@ -10,7 +10,7 @@ namespace SignalProcessing.Core.Tests
     public class SingleChannelSignalTests
     {
         /// <summary>
-        /// 
+        /// Выбрасывает исключение когда входные данные null при вызове конструктора SingleChannelSignal.
         /// </summary>
         [Fact]
         public void Signal_NullData_Throws()
