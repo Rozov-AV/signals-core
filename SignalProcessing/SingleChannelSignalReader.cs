@@ -25,7 +25,7 @@ namespace SignalProcessing.Core
 
             using (StreamReader reader = new StreamReader(filePath))
             {
-                if (!float.TryParse(reader.ReadLine(), NumberStyles.Float, CultureInfo.InvariantCulture, out freq))
+                if (!float.TryParse(reader.ReadLine(), /*NumberStyles.Float, CultureInfo.InvariantCulture,*/ out freq))
                     throw new InvalidDataException("Ошибка формата файла: строка 0!");
                 if (freq < 1)
                     throw new InvalidDataException("Некорректная частота квантования: строка 0!");
@@ -36,7 +36,7 @@ namespace SignalProcessing.Core
                     if (line == null)
                         break;
 
-                    if (!float.TryParse(line, NumberStyles.Float, CultureInfo.InvariantCulture, out float s))
+                    if (!float.TryParse(line, /*NumberStyles.Float, CultureInfo.InvariantCulture,*/ out float s))
                         throw new InvalidDataException($"Ошибка формата файла: строка {signalList.Count + 1}!");
 
                     signalList.Add(s);
