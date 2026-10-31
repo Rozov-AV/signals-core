@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CircularBuffer.cs" />
     <Compile Include="OfflineFilter.cs" />
     <Compile Include="OnlineFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
