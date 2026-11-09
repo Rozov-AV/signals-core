@@ -25,7 +25,9 @@ namespace SignalProcessing.Core
         }
 
         // 0 – самый старый элемент, Count − 1 – самый новый
-        public T this[int index] { get
+        public T this[int index]
+        { 
+            get
             {
                 throw new NotImplementedException();
             }
