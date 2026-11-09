@@ -8,20 +8,40 @@ namespace SignalProcessing.Core
 {
     public sealed class CircularBuffer<T>
     {
+        private readonly T[] _buffer;
+
+        private int _start;
+
         public CircularBuffer(int capacity)
         {
-            throw new NotImplementedException();
+            if (capacity <= 0)
+                throw new ArgumentOutOfRangeException(nameof(capacity), "Некорректная ёмкость буфера!");
+
+            Capacity = capacity;
+            Count = 0;
+
+            _start = 0;
+            _buffer = new T[capacity];
         }
 
         public int Capacity { get; } // ёмкость
 
-        public int Count { get; } // число хранимых элементов
+        public int Count { get; private set; } // число хранимых элементов
 
-        public bool IsFull { get; } // Count == Capacity
+        public bool IsFull { get => Count == Capacity; } // Count == Capacity
                                     // добавляет элемент; при заполненном буфере вытесняет самый старый
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            if (IsFull)
+            {
+                _buffer[_start % Capacity] = item;
+                _start++;
+                
+                return;
+            }
+
+            _buffer[Count] = item;
+            Count++;
         }
 
         // 0 – самый старый элемент, Count − 1 – самый новый
@@ -29,20 +49,28 @@ namespace SignalProcessing.Core
         { 
             get
             {
-                throw new NotImplementedException();
+                if ((index < 0) || (index >= Count))
+                    throw new ArgumentOutOfRangeException(nameof(index), "Некорректный индекс!");
+
+                return _buffer[(_start + index) % Capacity];
             }
         }
 
         // копия содержимого от старого к новому
         public T[] ToArray()
         {
-            throw new NotImplementedException();
+            T[] dst = new T[Count];
+            for (int i = 0; i < Count; i++)
+                dst[i] = _buffer[(i + _start) % Capacity];
+
+            return dst;
         }
 
         // удаляет все элементы, ёмкость сохраняется
         public void Clear()
         {
-            throw new NotImplementedException();
+            Count = 0;
+            _start = 0;
         }
     }
 }
