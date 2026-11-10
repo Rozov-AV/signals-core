@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SignalProcessing.Core
 {
-    public static class OfflineSingleChannelFilter
+    public static class OfflineFilter
     {
         #region Поля и свойства
 
@@ -22,6 +22,11 @@ namespace SignalProcessing.Core
 
         public static float[] Filter(float[] data, int windowSize)
         {
+            if ((windowSize < 1) || (windowSize % 2 == 0))
+                throw new ArgumentOutOfRangeException(nameof(windowSize), "Некорректный размер окна!");
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
+
             int length = data.Length;
             int windowRadius = windowSize / 2;
             int extLength = length + 2 * windowRadius;
